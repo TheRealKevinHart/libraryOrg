@@ -1,4 +1,4 @@
-package com.springboot.libraryOrg;
+package com.springboot.libraryOrg.models;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,7 +15,17 @@ public class Books {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer id;
 	private String title;
-  	private String author;
+	private String author;
+
+	public Books() {
+		
+	}
+  	public Books(Integer id, String title, String author) {
+		super();
+		this.id = id;
+		this.title = title;
+		this.author = author;
+	}
 
   	public Integer getId() {
 	  return id;
