@@ -1,18 +1,19 @@
 package com.springboot.libraryOrg.models;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.Entity;
+
+//import javax.persistence.Column;
+//import javax.persistence.GeneratedValue;
+//import javax.persistence.GenerationType;
+//import javax.persistence.Table;
 
 @Entity // This tells Hibernate to make a table out of this class
 //@Table(name = "librarydb")
 public class Books {
 	@Id //Specifies the primary key of an entity
-	@Column(name = "id") //Specified the mapped column for a persistent property or field.
-	@GeneratedValue(strategy=GenerationType.AUTO)
+//	@Column(name = "id") //Specified the mapped column for a persistent property or field.
+//	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer id;
 	private String title;
 	private String author;
@@ -20,6 +21,7 @@ public class Books {
 	public Books() {
 		
 	}
+	
   	public Books(Integer id, String title, String author) {
 		super();
 		this.id = id;
@@ -50,5 +52,9 @@ public class Books {
   	public void setAuthor(String author) {
   		this.author = author;
   	}
+	@Override
+	public String toString() {
+		return "Books [id=" + id + ", title=" + title + ", author=" + author + "]";
+	}
 }
 
