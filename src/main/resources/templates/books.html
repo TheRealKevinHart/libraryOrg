@@ -13,14 +13,12 @@
 	<table class="table table-stripped">
 	<thead>
 	<tr>
-	<td>Id</td>
 	<td>Title</td>
 	<td>Author</td>
 	</tr>
 	</thead>
 	
 	<tr th:each="book:${books}">
-	<td th:text="${book.Id}">Id</td>
 	<td th:text="${book.title}">Title</td>
 	<td th:text="${book.author}">Author</td>
 
