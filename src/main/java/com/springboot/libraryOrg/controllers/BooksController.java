@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.springboot.libraryOrg.models.Books;
@@ -36,6 +37,12 @@ public class BooksController {
 	@PostMapping("/addNew")
 	public String addNew(Books books) {
 		booksService.addNew(books);
+		return "redirect:/books/getAll";
+	}
+	
+	@RequestMapping(value="/update", method = {RequestMethod.PUT, RequestMethod.GET})
+	public String update(Books books) {
+		booksService.update(books);
 		return "redirect:/books/getAll";
 	}
 }

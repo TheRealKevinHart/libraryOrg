@@ -26,4 +26,8 @@ public class BooksService {
 	public void addNew(Books books) {
 		booksRepository.save(books);
 	}
+	
+	public void update(Books books) {
+		booksRepository.save(books);
+	}
 }
