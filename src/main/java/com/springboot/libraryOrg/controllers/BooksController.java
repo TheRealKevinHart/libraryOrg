@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -43,6 +44,12 @@ public class BooksController {
 	@RequestMapping(value="/update", method = {RequestMethod.PUT, RequestMethod.GET})
 	public String update(Books books) {
 		booksService.update(books);
+		return "redirect:/books/getAll";
+	}
+	
+	@DeleteMapping(value="/delete")
+	public String delete(Integer Id) {
+		booksService.delete(Id);
 		return "redirect:/books/getAll";
 	}
 }
