@@ -12,7 +12,7 @@
 	<artifactId>libraryOrg</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>libraryOrg</name>
-	<description>Demo project for Spring Boot</description>
+	<description>Library Organization Application</description>
 	<properties>
 		<java.version>11</java.version>
 	</properties>
@@ -52,13 +52,14 @@
 		<dependency>
 		    <groupId>org.webjars</groupId>
 		    <artifactId>jquery</artifactId>
-		    <version>3.5.1</version>
+		    <version>3.4.1</version>
 		</dependency>
 		<dependency>
 		    <groupId>org.webjars</groupId>
 		    <artifactId>bootstrap</artifactId>
-		    <version>5.1.3</version>
+		    <version>4.3.1</version>
 		</dependency>
+
 	</dependencies>
 
 	<build>

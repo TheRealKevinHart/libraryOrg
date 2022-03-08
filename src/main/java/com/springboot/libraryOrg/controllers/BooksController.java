@@ -47,7 +47,7 @@ public class BooksController {
 		return "redirect:/books/getAll";
 	}
 	
-	@DeleteMapping(value="/delete")
+	@RequestMapping(value="/delete", method = {RequestMethod.DELETE, RequestMethod.GET})
 	public String delete(Integer Id) {
 		booksService.delete(Id);
 		return "redirect:/books/getAll";

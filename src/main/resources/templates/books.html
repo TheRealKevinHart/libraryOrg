@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link href="/webjars/bootstrap/5.1.3/css/bootstrap.css" rel="stylesheet"/>
-<script type="text/javascript" src="/webjars/jquery/3.5.1/js/jquery.min.js"></script>
-<script type="text/javascript" src="/webjars/bootstrap/5.1.3/js/bootstrap.min.js"></script>
-<!--<script type="text/javascript" src="../static/main.js" th:src="@{/main.js}"></script>-->
+<link href="/webjars/bootstrap/4.3.1/css/bootstrap.css" rel="stylesheet" />
+<script type="text/javascript" src="/webjars/jquery/3.4.1/jquery.min.js"></script>
+<script type="text/javascript" src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../static/js/main.js" th:src="@{/js/main.js}"></script>
 <meta charset="ISO-8859-1">
 <title>List of Books</title>
 </head>
 <body>
 <h2>List of Books</h2>
 	
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addModal">Add New</button>
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addModal">Add New</button>
 
 <table class="table table-stripped">
 <thead>
@@ -25,8 +25,8 @@
 <tr th:each="book:${books}">
 <td th:text="${book.title}">Title</td>
 <td th:text="${book.author}">Author</td>
-<td><a class="btn btn-warning">Edit</a></td>
-<td><a th:href="@{/students/delete/(Id=${books.Id})}" class="btn btn-danger" name="deleteButton">Delete</a></td>
+<td><a th:href="@{/books/getOne/(Id=${book.Id})}" class="btn btn-warning">Edit</a></td>
+<td><a th:href="@{/books/delete/(Id=${book.Id})}" class="btn btn-danger" id="deleteButton">Delete</a></td>
 </tr>
 </table>
 
@@ -67,7 +67,7 @@
  </form>
 </div>
 
-<!--<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
  <form th:action="@{/books/update}" method="put">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -78,21 +78,21 @@
         </button>
       </div>
       <div class="modal-body">
-      
+          
           <div class="form-group">
             <label for="recipient-name" class="col-form-label">Id:</label>
-            <input type="text" class="form-control" id="recipient-name" name="idEdit">
+            <input type="text" class="form-control" id="idEdit" name="id">
           </div>
           
           <div class="form-group">
             <label for="recipient-name" class="col-form-label">Title:</label>
-            <input type="text" class="form-control" id="recipient-name" name="titleEdit">
+            <input type="text" class="form-control" id="titleEdit" name="title">
           </div>
           
           <div class="form-group">
             <label for="recipient-name" class="col-form-label">Author:</label>
-            <input type="text" class="form-control" id="recipient-name" name="authorEdit">
-          </div>-->
+            <input type="text" class="form-control" id="authorEdit" name="author">
+          </div>
       </div>
       
       <div class="modal-footer">
@@ -117,8 +117,8 @@
         <p>Are you sure?</p>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary">Yes, delete...</button>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Exit</button>
+        <a href="" class="btn btn-primary" id="delRef">Yes, delete...</a>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
       </div>
     </div>
   </div>
