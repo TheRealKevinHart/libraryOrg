@@ -26,6 +26,10 @@ public class BooksController {
 	public String getAll(Model model) {
 		List<Books> books = booksService.getAll();
 		model.addAttribute("books", books);
+		
+		String username = "Root";
+		model.addAttribute("username", username);
+		
 		return "books";
 	}
 	
