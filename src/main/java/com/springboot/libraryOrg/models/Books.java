@@ -10,41 +10,62 @@ public class Books {
 	private Integer id;
 	private String title;
 	private String author;
+	private Integer year;
+	private String genre;
 
 	public Books() {
 		
 	}
 	
-  	public Books(Integer id, String title, String author) {
+  	public Books(Integer id, String title, String author, Integer year, String genre) {
 		super();
 		this.id = id;
 		this.title = title;
 		this.author = author;
+		this.year = year;
+		this.genre = genre;
 	}
 
-  	public Integer getId() {
+	public Integer getId() {
 	  return id;
-  	}
+	}
+	
+	public void setId(Integer id) {
+		this.id = id;
+	}
+	
+	public String getTitle() {
+		return title;
+	}
+	
+	public void setTitle(String title) {
+	  	this.title = title;
+	}
+	
+	public String getAuthor() {
+		return author;
+	}
+	
+	public void setAuthor(String author) {
+		this.author = author;
+	}
+	
+	public Integer getYear() {
+		return year;
+	}
 
-  	public void setId(Integer id) {
-  		this.id = id;
-  	}
+	public void setYear(Integer year) {
+		this.year = year;
+	}
 
-  	public String getTitle() {
-  		return title;
-  	}
+	public String getGenre() {
+		return genre;
+	}
 
-  	public void setTitle(String title) {
-  	  	this.title = title;
-  	}
+	public void setGenre(String genre) {
+		this.genre = genre;
+	}
 
-  	public String getAuthor() {
-  		return author;
-  	}
-
-  	public void setAuthor(String author) {
-  		this.author = author;
-  	}
 	@Override
 	public String toString() {
 		return "Books [id=" + id + ", title=" + title + ", author=" + author + "]";
