@@ -1,10 +1,12 @@
 package com.springboot.libraryOrg.models;
 
-import javax.persistence.Id;
 import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 
 @Entity // This tells Hibernate to make a table out of this class
+@Table(name = "books")
 public class Books {
 	@Id //Specifies the primary key of an entity
 	private Integer id;

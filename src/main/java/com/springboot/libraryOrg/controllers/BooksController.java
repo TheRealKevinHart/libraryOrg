@@ -56,4 +56,18 @@ public class BooksController {
 		booksService.delete(Id);
 		return "redirect:/books/getAll";
 	}
+	
+	@RequestMapping("/search")
+	public String search(Books books, Model model, String keyword) {
+		if (keyword != null) {
+			List<Books> list = booksService.getByKeyword(keyword);
+			model.addAttribute("list", list);
+		}
+		else {
+			List<Books> list = booksService.getAll();
+			model.addAttribute("list", list);
+		}
+		return "books";
+	}
+	
 }

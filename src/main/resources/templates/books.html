@@ -1,10 +1,12 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <link href="/webjars/bootstrap/4.3.1/css/bootstrap.css" rel="stylesheet" />
 <script type="text/javascript" src="/webjars/jquery/3.4.1/jquery.min.js"></script>
 <script type="text/javascript" src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="../static/js/main.js" th:src="@{/js/main.js}"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js" integrity="sha384-eMNCOe7tC1doHpGoWe/6oMVemdAVTMs2xqW4mwXrXsW0L84Iytr2wi5v2QjrP/xp" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.min.js" integrity="sha384-cn7l7gDp0eyniUwwAZgrzD06kc/tftFf19TOAs2zVinnD/C7E91j9yyk5//jjpt/" crossorigin="anonymous"></script>
 <meta charset="ISO-8859-1">
 <title>List of Books</title>
 </head>
@@ -15,11 +17,19 @@
 	
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addModal">Add New</button>
 
+<form th:action="@{/search}" method="get">
+	<input type="text" name="keyword" th:value="${keyword}" placeholder="Find by title or author" size="50">
+	<button type="submit" class="btn btn-info">Search</button>
+	<button type="submit" class="btn btn-info">Reset</button>
+</form>
+
 <table class="table table-stripped">
 <thead>
 <tr>
 <td>Title</td>
 <td>Author</td>
+<td>Year</td>
+<td>Genre</td>
 <td>Edit</td>
 <td>Delete</td>
 </tr>
@@ -27,6 +37,8 @@
 <tr th:each="book:${books}">
 <td th:text="${book.title}">Title</td>
 <td th:text="${book.author}">Author</td>
+<td th:text="${book.year}">Year</td>
+<td th:text="${book.genre}">Genre</td>
 <td><a th:href="@{/books/getOne/(Id=${book.Id})}" class="btn btn-warning">Edit</a></td>
 <td><a th:href="@{/books/delete/(Id=${book.Id})}" class="btn btn-danger" id="deleteButton">Delete</a></td>
 </tr>
@@ -44,10 +56,10 @@
       </div>
       <div class="modal-body">
       
-          <!--<div class="form-group">
+          <div class="form-group">
             <label for="recipient-name" class="col-form-label">Id:</label>
             <input type="text" class="form-control" id="recipient-name" name="id">
-          </div>-->
+          </div>
           
           <div class="form-group">
             <label for="recipient-name" class="col-form-label">Title:</label>
@@ -57,6 +69,16 @@
           <div class="form-group">
             <label for="recipient-name" class="col-form-label">Author:</label>
             <input type="text" class="form-control" id="recipient-name" name="author">
+          </div>
+          
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Year:</label>
+            <input type="text" class="form-control" id="recipient-name" name="year">
+          </div>
+          
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Genre:</label>
+            <input type="text" class="form-control" id="recipient-name" name="genre">
           </div>
       </div>
       
@@ -94,6 +116,16 @@
           <div class="form-group">
             <label for="recipient-name" class="col-form-label">Author:</label>
             <input type="text" class="form-control" id="authorEdit" name="author">
+          </div>
+          
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Year:</label>
+            <input type="text" class="form-control" id="yearEdit" name="year">
+          </div>
+          
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Genre:</label>
+            <input type="text" class="form-control" id="genreEdit" name="genre">
           </div>
       </div>
       

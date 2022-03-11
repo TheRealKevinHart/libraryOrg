@@ -34,4 +34,8 @@ public class BooksService {
 	public void delete(Integer Id) {
 		booksRepository.deleteById(Id);
 	}
+	
+	public List<Books> getByKeyword(String keyword) {
+		return booksRepository.findByKeyword(keyword);
+	}
 }

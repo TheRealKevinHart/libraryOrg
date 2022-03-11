@@ -13,6 +13,8 @@ $('document').ready(function(){
 			$('#idEdit').val(book.id);
 			$('#titleEdit').val(book.title);
 			$('#authorEdit').val(book.author);
+			$('#yearEdit').val(book.year);
+			$('#genreEdit').val(book.genre);
 		});
 		
 		$('#editModal').modal();				
