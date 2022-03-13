@@ -33,6 +33,14 @@ public class BooksController {
 		return "books";
 	}
 	
+	@RequestMapping("/sort")
+	public String sort(Model model) {
+		List<Books> books = booksService.sort();
+		model.addAttribute("books", books);
+		
+		return "redirect:/books/getAll";
+	}
+	
 	@RequestMapping("/getOne")
 	@ResponseBody
 	public Optional<Books> getOne(Integer Id) {
@@ -55,19 +63,6 @@ public class BooksController {
 	public String delete(Integer Id) {
 		booksService.delete(Id);
 		return "redirect:/books/getAll";
-	}
-	
-	@RequestMapping("/search")
-	public String search(Books books, Model model, String keyword) {
-		if (keyword != null) {
-			List<Books> list = booksService.getByKeyword(keyword);
-			model.addAttribute("list", list);
-		}
-		else {
-			List<Books> list = booksService.getAll();
-			model.addAttribute("list", list);
-		}
-		return "books";
 	}
 	
 }

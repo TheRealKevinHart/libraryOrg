@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.springboot.libraryOrg.models.Books;
@@ -35,7 +36,7 @@ public class BooksService {
 		booksRepository.deleteById(Id);
 	}
 	
-	public List<Books> getByKeyword(String keyword) {
-		return booksRepository.findByKeyword(keyword);
+	public List<Books> sort() {
+		return (List<Books>) booksRepository.findAll(Sort.by(Sort.Direction.ASC, "books"));
 	}
 }
