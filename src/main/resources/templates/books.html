@@ -15,8 +15,6 @@
 	
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addModal">Add New</button>
 
-<button type="button" class="btn btn-secondary" th:action="@{/books/sort}">Sort</button>
-
 <table class="table table-stripped">
 <thead>
 <tr>
@@ -38,6 +36,28 @@
 <td><a th:href="@{/books/delete/(Id=${book.Id})}" class="btn btn-danger" id="deleteButton">Delete</a></td>
 </tr>
 </table>
+
+<div th:if="${totalPages > 1}">
+	<div class="row col-sm-10">
+		<div class="col-sm-2">
+			Total Rows: [[$(totalItems)]]
+		</div>
+		<div class="col-sm-1">
+			<span th:each="i: ${#numbers.sequence(1, totalPages)}">
+				<a th:if="${currentPage != i}" th:href="@{'/page/' + ${i}}">[[$(i)]]</a>
+				<span th:unless="${currentPage != i}">[[${i}]]</span> &nbsp; &nbsp;
+			</span>
+		</div>
+		<div class="col-sm-1">
+			<a th:if="${currentPage < totalPages}" th:href="@{'/page/' + ${currentPage + 1}}">Next</a>
+			<span th:unless="${currentPage < totalPages}">Next</span>
+		</div>
+		<div class="col-sm-1">
+			<a th:if="${currentPage < totalPages}" th:href="@{'/page/' + ${currentPage + 1}}">Last</a>
+			<span th:unless="${currentPage < totalPages}">Last</span>
+		</div>
+	</div>
+</div>
 
 <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
  <form th:action="@{/books/addNew}" method="post">
