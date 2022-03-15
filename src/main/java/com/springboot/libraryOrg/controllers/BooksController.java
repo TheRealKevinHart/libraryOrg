@@ -4,8 +4,10 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -27,13 +29,15 @@ public class BooksController {
 	
 	@RequestMapping("/getAll")
 	public String getAll(Model model) {
-		List<Books> books = booksService.getAll();
-		model.addAttribute("books", books);
+//		List<Books> books = booksService.getAll();
+//		model.addAttribute("books", books);
+//		
+//		String username = "Root";
+//		model.addAttribute("username", username);
+//
+//		return "books";
 		
-		String username = "Root";
-		model.addAttribute("username", username);
-		
-		return "books";
+		return findPaginated(1, model);
 	}
 	
 	@RequestMapping("/getOne")
@@ -58,5 +62,20 @@ public class BooksController {
 	public String delete(Integer Id) {
 		booksService.delete(Id);
 		return "redirect:/books/getAll";
+	}
+	
+	@RequestMapping("/page/{pageNo}")
+	public String findPaginated(@PathVariable(value = "pageNo") int pageNo, Model model) {
+		int pageSize = 5;
+		
+		Page<Books> page = booksService.findPaginated(pageNo, pageSize);
+		List<Books> listBooks = page.getContent();
+	
+		model.addAttribute("currentPage", pageNo);
+		model.addAttribute("totalPages", page.getTotalPages());
+		model.addAttribute("totalItems", page.getTotalElements());
+		model.addAttribute("listBooks", listBooks);
+		
+		return "index";
 	}
 }
