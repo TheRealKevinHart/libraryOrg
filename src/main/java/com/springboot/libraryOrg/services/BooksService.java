@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.springboot.libraryOrg.models.Books;
@@ -17,29 +18,35 @@ public class BooksService {
 
 	@Autowired
 	private BooksRepository booksRepository;
-	
-	public List<Books> getAll() {
-		return (List<Books>) booksRepository.findAll();
+
+	public List<Books> getAllBooks() {
+		return booksRepository.findAll();
 	}
-	
-	public Optional<Books> getOne(Integer Id) {
-		return booksRepository.findById(Id);		
+
+	public void saveBooks(Books books) {
+		this.booksRepository.save(books);
 	}
-	
-	public void addNew(Books books) {
-		booksRepository.save(books);
+
+	public Books getBooksById(long id) {
+		Optional<Books> optional = booksRepository.findById(id);
+		Books books = null;
+		if (optional.isPresent()) {
+			books = optional.get();
+		} else {
+			throw new RuntimeException(" Books not found for id :: " + id);
+		}
+		return books;
 	}
-	
-	public void update(Books books) {
-		booksRepository.save(books);
+
+	public void deleteBooksById(long id) {
+		this.booksRepository.deleteById(id);
 	}
-	
-	public void delete(Integer Id) {
-		booksRepository.deleteById(Id);
-	}
-	
-	public Page<Books> findPaginated(int pageNo, int pageSize) {
-		Pageable pageable = PageRequest.of(pageNo - 1, pageSize);
-		return booksRepository.findAll(pageable);
+
+	public Page<Books> findPaginated(int pageNo, int pageSize, String sortField, String sortDirection) {
+		Sort sort = sortDirection.equalsIgnoreCase(Sort.Direction.ASC.name()) ? Sort.by(sortField).ascending() :
+			Sort.by(sortField).descending();
+		
+		Pageable pageable = PageRequest.of(pageNo - 1, pageSize, sort);
+		return this.booksRepository.findAll(pageable);
 	}
 }

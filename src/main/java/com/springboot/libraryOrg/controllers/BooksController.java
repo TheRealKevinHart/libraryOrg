@@ -1,81 +1,87 @@
 package com.springboot.libraryOrg.controllers;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.springboot.libraryOrg.models.Books;
 import com.springboot.libraryOrg.services.BooksService;
 
 @Controller
-@RequestMapping("/books")
 public class BooksController {
-	
+
 	@Autowired
 	private BooksService booksService;
 	
-	public BooksController(BooksService booksService) {
-		this.booksService = booksService;
+	// display list of books
+	@GetMapping("/")
+	public String viewHomePage(Model model) {
+		return findPaginated(1, "title", "asc", model);		
 	}
 	
-	@RequestMapping("/getAll")
-	public String getAll(Model model) {
-//		List<Books> books = booksService.getAll();
-//		model.addAttribute("books", books);
-//		
-//		String username = "Root";
-//		model.addAttribute("username", username);
-//
-//		return "books";
+	@GetMapping("/showNewBooksForm")
+	public String showNewBooksForm(Model model) {
+		// create model attribute to bind form data
+		Books books = new Books();
+		model.addAttribute("books", books);
+		return "new_books";
+	}
+	
+	@PostMapping("/saveBooks")
+	public String saveBooks(@ModelAttribute("books") Books books) {
+		// save books to database
+		booksService.saveBooks(books);
+		return "redirect:/";
+	}
+	
+	@GetMapping("/showFormForUpdate/{id}")
+	public String showFormForUpdate(@PathVariable ( value = "id") long id, Model model) {
 		
-		return findPaginated(1, model);
+		// get books from the service
+		Books books = booksService.getBooksById(id);
+		
+		// set books as a model attribute to pre-populate the form
+		model.addAttribute("books", books);
+		return "update_books";
 	}
 	
-	@RequestMapping("/getOne")
-	@ResponseBody
-	public Optional<Books> getOne(Integer Id) {
-		return booksService.getOne(Id);
+	@GetMapping("/deleteBooks/{id}")
+	public String deleteBooks(@PathVariable (value = "id") long id) {
+		
+		// call delete books method 
+		this.booksService.deleteBooksById(id);
+		return "redirect:/";
 	}
 	
-	@PostMapping("/addNew")
-	public String addNew(Books books) {
-		booksService.addNew(books);
-		return "redirect:/books/getAll";
-	}
 	
-	@RequestMapping(value="/update", method = {RequestMethod.PUT, RequestMethod.GET})
-	public String update(Books books) {
-		booksService.update(books);
-		return "redirect:/books/getAll";
-	}
-	
-	@RequestMapping(value="/delete", method = {RequestMethod.DELETE, RequestMethod.GET})
-	public String delete(Integer Id) {
-		booksService.delete(Id);
-		return "redirect:/books/getAll";
-	}
-	
-	@RequestMapping("/page/{pageNo}")
-	public String findPaginated(@PathVariable(value = "pageNo") int pageNo, Model model) {
+	@GetMapping("/page/{pageNo}")
+	public String findPaginated(@PathVariable (value = "pageNo") int pageNo, 
+			@RequestParam("sortField") String sortField,
+			@RequestParam("sortDir") String sortDir,
+			Model model) {
 		int pageSize = 5;
 		
-		Page<Books> page = booksService.findPaginated(pageNo, pageSize);
+		Page<Books> page = booksService.findPaginated(pageNo, pageSize, sortField, sortDir);
 		List<Books> listBooks = page.getContent();
-	
+		
 		model.addAttribute("currentPage", pageNo);
 		model.addAttribute("totalPages", page.getTotalPages());
 		model.addAttribute("totalItems", page.getTotalElements());
-		model.addAttribute("listBooks", listBooks);
 		
+		model.addAttribute("sortField", sortField);
+		model.addAttribute("sortDir", sortDir);
+		model.addAttribute("reverseSortDir", sortDir.equals("asc") ? "desc" : "asc");
+		
+		model.addAttribute("listBooks", listBooks);
 		return "index";
 	}
 }
