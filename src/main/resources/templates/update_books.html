@@ -25,6 +25,12 @@
 				
 				<input type="text" th:field="*{year}" class="form-control mb-4 col-4">
 				
+				<select name="genre" id="genre" th:field="*{genre}">
+					<option value="">Select a Genre</option>
+					<option value="Fiction">Fiction</option>
+					<option value="Non-Fiction">Non-Fiction</option>
+				</select>
+				
 				<button type="submit" class="btn btn-info col-2"> Update Books</button>
 		</form>
 		

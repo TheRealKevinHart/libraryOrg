@@ -17,13 +17,19 @@
 		<form action="#" th:action="@{/saveBooks}" th:object="${books}"
 			method="POST">
 			<input type="text" th:field="*{title}"
-				placeholder="Book Title" class="form-control mb-4 col-4">
+				placeholder="Book Title" class="form-control mb-4 col-4" required>
 				
 				<input type="text" th:field="*{author}"
-				placeholder="Book Author" class="form-control mb-4 col-4">
+				placeholder="Book Author" class="form-control mb-4 col-4" required>
 				
 				<input type="text" th:field="*{year}"
 				placeholder="Release Year" class="form-control mb-4 col-4">
+				
+				<select name="genre" id="genre" th:field="*{genre}">
+					<option value="">Select a Genre</option>
+					<option value="Fiction">Fiction</option>
+					<option value="Non-Fiction">Non-Fiction</option>
+				</select>
 				
 				<button type="submit" class="btn btn-info col-2"> Save Books</button>
 		</form>
