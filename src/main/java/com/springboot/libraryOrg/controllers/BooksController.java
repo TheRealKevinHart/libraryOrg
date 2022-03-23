@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.springboot.libraryOrg.models.Books;
+import com.springboot.libraryOrg.repository.BooksRepository;
 import com.springboot.libraryOrg.services.BooksService;
 
 @Controller
@@ -20,6 +21,9 @@ public class BooksController {
 
 	@Autowired
 	private BooksService booksService;
+	
+	@Autowired
+	private BooksRepository booksRepository;
 	
 	// display list of books
 	@GetMapping("/")
@@ -82,5 +86,20 @@ public class BooksController {
 		
 		model.addAttribute("listBooks", listBooks);
 		return "index";
+	}
+	
+	@GetMapping("/booksSearch")
+	public String booksSearch(Model model) {
+		model.addAttribute("books", new Books());
+		
+		return "booksSearch";
+	}
+	
+	@PostMapping("/booksSearch")
+	public String booksSearch(Books books, Model model, String title) {
+		List<Books> foundBooks = booksRepository.findByTitle(title);
+		model.addAttribute("foundBooks", foundBooks);
+		
+		return "booksSearch";
 	}
 }
