@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta charset="ISO-8859-1">
 <title>Books Management System</title>
@@ -15,11 +15,6 @@
 
 	<div class="container my-2">
 	<h1>Books List</h1>
-	
-	<div class="navbar">
-	  <input type="text" placeholder="Search..">
-	  <!--<button type="submit" class="btn btn-info col-2">Search</button>-->
-	</div>
 	
 	<a th:href = "@{/showNewBooksForm}" class="btn btn-primary btn-sm mb-3"> Add Books </a>
 	
