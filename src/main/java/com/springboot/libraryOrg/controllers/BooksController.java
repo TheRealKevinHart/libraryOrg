@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.springboot.libraryOrg.models.Books;
@@ -26,9 +28,9 @@ public class BooksController {
 	private BooksRepository booksRepository;
 	
 	// display list of books
-	@GetMapping("/")
-	public String viewHomePage(Model model) {
-		return findPaginated(1, "title", "asc", model);		
+	@RequestMapping(value = "/", method = {RequestMethod.GET, RequestMethod.POST})
+	public String viewHomePage(Model model, String title) {
+		return findPaginated(1, "title", "asc", model, title);		
 	}
 	
 	@GetMapping("/showNewBooksForm")
@@ -70,7 +72,8 @@ public class BooksController {
 	public String findPaginated(@PathVariable (value = "pageNo") int pageNo, 
 			@RequestParam("sortField") String sortField,
 			@RequestParam("sortDir") String sortDir,
-			Model model) {
+			Model model,
+			String title) {
 		int pageSize = 5;
 		
 		Page<Books> page = booksService.findPaginated(pageNo, pageSize, sortField, sortDir);
@@ -85,21 +88,27 @@ public class BooksController {
 		model.addAttribute("reverseSortDir", sortDir.equals("asc") ? "desc" : "asc");
 		
 		model.addAttribute("listBooks", listBooks);
-		return "index";
-	}
-	
-	@GetMapping("/booksSearch")
-	public String booksSearch(Model model) {
+		
 		model.addAttribute("books", new Books());
 		
-		return "booksSearch";
-	}
-	
-	@PostMapping("/booksSearch")
-	public String booksSearch(Books books, Model model, String title) {
 		List<Books> foundBooks = booksRepository.findByTitle(title);
 		model.addAttribute("foundBooks", foundBooks);
 		
-		return "booksSearch";
+		return "index";
 	}
+	
+//	@GetMapping("/booksSearch")
+//	public String booksSearch(Model model) {
+//		model.addAttribute("books", new Books());
+//		
+//		return "booksSearch";
+//	}
+	
+//	@PostMapping("/booksSearch")
+//	public String booksSearch(Books books, Model model, String title) {
+//		List<Books> foundBooks = booksRepository.findByTitle(title);
+//		model.addAttribute("foundBooks", foundBooks);
+//		
+//		return "booksSearch";
+//	}
 }
