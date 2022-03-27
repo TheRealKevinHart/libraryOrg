@@ -29,8 +29,8 @@ public class BooksController {
 	
 	// display list of books
 	@RequestMapping(value = "/", method = {RequestMethod.GET, RequestMethod.POST})
-	public String viewHomePage(Model model, String title) {
-		return findPaginated(1, "title", "asc", model, title);		
+	public String viewHomePage(Model model, String title, String author) {
+		return findPaginated(1, "title", "asc", model, title, author);		
 	}
 	
 	@GetMapping("/showNewBooksForm")
@@ -73,7 +73,7 @@ public class BooksController {
 			@RequestParam("sortField") String sortField,
 			@RequestParam("sortDir") String sortDir,
 			Model model,
-			String title) {
+			String title, String author) {
 		int pageSize = 5;
 		
 		Page<Books> page = booksService.findPaginated(pageNo, pageSize, sortField, sortDir);
@@ -90,25 +90,7 @@ public class BooksController {
 		model.addAttribute("listBooks", listBooks);
 		
 		model.addAttribute("books", new Books());
-		
-		List<Books> foundBooks = booksRepository.findByTitle(title);
-		model.addAttribute("foundBooks", foundBooks);
-		
+				
 		return "index";
-	}
-	
-	@GetMapping("/booksSearch")
-	public String booksSearch(Model model) {
-		model.addAttribute("books", new Books());
-		
-		return "booksSearch";
-	}
-	
-	@PostMapping("/booksSearch")
-	public String booksSearch(Books books, Model model, String title) {
-		List<Books> foundBooks = booksRepository.findByTitle(title);
-		model.addAttribute("foundBooks", foundBooks);
-		
-		return "booksSearch";
 	}
 }

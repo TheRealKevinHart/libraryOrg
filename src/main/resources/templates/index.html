@@ -24,25 +24,6 @@
                 <input type="submit" value="Search">
             </div>
         </form>
-       	<!--<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for titles...">-->
-        
-
-        <!--<table>
-            <!--<tr>
-				<th>
-					<a th:href="@{'/page/' + ${currentPage} + '?sortField=title&sortDir=' + ${reverseSortDir}}">Book Title</a>
-				</th>                
-				<th>Author</th>
-                <th>Release Year</th>
-                <th>Genre</th>
-            </tr>
-            <tr th:each="books:${foundBooks}">
-                <td><span th:text="${books.title}" >BOOKS.TITLE</span></td>
-                <td><span th:text="${books.author}">BOOKS.AUTHOR</span></td>
-                <td><span th:text="${books.year}">BOOKS.YEAR</span></td>
-                <td><span th:text="${books.genre}">BOOKS.GENRE</span></td>
-            </tr>
-        </table>-->
 	
 	<a th:href = "@{/showNewBooksForm}" class="btn btn-primary btn-sm mb-3"> Add Books </a>
 		
