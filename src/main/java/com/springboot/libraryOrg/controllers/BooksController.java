@@ -97,18 +97,18 @@ public class BooksController {
 		return "index";
 	}
 	
-//	@GetMapping("/booksSearch")
-//	public String booksSearch(Model model) {
-//		model.addAttribute("books", new Books());
-//		
-//		return "booksSearch";
-//	}
+	@GetMapping("/booksSearch")
+	public String booksSearch(Model model) {
+		model.addAttribute("books", new Books());
+		
+		return "booksSearch";
+	}
 	
-//	@PostMapping("/booksSearch")
-//	public String booksSearch(Books books, Model model, String title) {
-//		List<Books> foundBooks = booksRepository.findByTitle(title);
-//		model.addAttribute("foundBooks", foundBooks);
-//		
-//		return "booksSearch";
-//	}
+	@PostMapping("/booksSearch")
+	public String booksSearch(Books books, Model model, String title) {
+		List<Books> foundBooks = booksRepository.findByTitle(title);
+		model.addAttribute("foundBooks", foundBooks);
+		
+		return "booksSearch";
+	}
 }
