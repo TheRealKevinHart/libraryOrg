@@ -30,7 +30,7 @@ public class BooksController {
 	// display list of books
 	@RequestMapping(value = "/", method = {RequestMethod.GET, RequestMethod.POST})
 	public String viewHomePage(Model model, String title, String author) {
-		return findPaginated(1, "title", "asc", model, title, author);		
+		return findPaginated(1, "title", "asc", model);		
 	}
 	
 	@GetMapping("/showNewBooksForm")
@@ -72,9 +72,8 @@ public class BooksController {
 	public String findPaginated(@PathVariable (value = "pageNo") int pageNo, 
 			@RequestParam("sortField") String sortField,
 			@RequestParam("sortDir") String sortDir,
-			Model model,
-			String title, String author) {
-		int pageSize = 5;
+			Model model) {
+		int pageSize = 10;
 		
 		Page<Books> page = booksService.findPaginated(pageNo, pageSize, sortField, sortDir);
 		List<Books> listBooks = page.getContent();
