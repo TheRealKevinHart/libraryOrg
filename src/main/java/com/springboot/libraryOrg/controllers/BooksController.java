@@ -28,7 +28,8 @@ public class BooksController {
 	private BooksRepository booksRepository;
 	
 	// display list of books
-	@RequestMapping(value = "/", method = {RequestMethod.GET, RequestMethod.POST})
+	//@RequestMapping(value = "/", method = {RequestMethod.GET, RequestMethod.POST})
+	@GetMapping("/")
 	public String viewHomePage(Model model, String title, String author) {
 		return findPaginated(1, "title", "asc", model);		
 	}
@@ -92,4 +93,21 @@ public class BooksController {
 				
 		return "index";
 	}
+	
+    @GetMapping("/booksSearch")
+    public String booksSearch(Model model) {
+
+        model.addAttribute("books", new Books());
+
+        return "booksSearch";
+    }
+
+    @PostMapping("/booksSearch")
+    public String booksSearch(Books books, Model model, String title) {
+
+        List<Books> foundBooks = booksRepository.findByBook(title);
+        model.addAttribute("foundBooks", foundBooks);
+
+        return "booksSearch";
+    }
 }
