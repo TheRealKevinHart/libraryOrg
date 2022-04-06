@@ -1,13 +1,12 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-    <head>
-        <meta charset="UTF-8">
-        <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" >
-        <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.css}" >
-        <title>Books output</title>
+      xmlns:th="http://www.thymeleaf.org">
+     <head>
+		<meta charset="ISO-8859-1">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+        <title>Books Search</title>
     </head>
+
     <body>
         <div><h3>Books search</h3></div>
         <form th:object="${books}" method="post">
@@ -17,21 +16,33 @@
                 <input type="submit" value="Search">
             </div>
         </form>
-
-        <table>
-            <tr>
-                <th>Title</th>
-                <th>Author</th>
-                <th>Release Year</th>
-                <th>Genre</th>
-            </tr>
-            <tr th:each="books:${foundBooks}">
-                <td><span th:text="${books.title}" >BOOKS.TITLE</span></td>
-                <td><span th:text="${books.author}">BOOKS.AUTHOR</span></td>
-                <td><span th:text="${books.year}">BOOKS.YEAR</span></td>
-                <td><span th:text="${books.genre}">BOOKS.GENRE</span></td>
-            </tr>
-        </table>
+        
+        <table border="1" class = "table table-striped table-responsive-md">
+			<thead>
+				<tr>
+					<th>
+						<a th:href="@{'/page/' + ${currentPage} + '?sortField=title&sortDir=' + ${reverseSortDir}}">Book Title</a>
+					</th>
+					<th>
+						<a th:href="@{'/page/' + ${currentPage} + '?sortField=author&sortDir=' + ${reverseSortDir}}">Book Author</a>
+					</th>
+					<th>Release Year</th>
+					<th>Genre</th>
+					<th> Actions </th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="books : ${foundBooks}">
+					<td th:text="${books.title}"></td>
+					<td th:text="${books.author}"></td>
+					<td th:text="${books.year}"></td>
+					<td th:text="${books.genre}"></td>
+					<td> <a th:href="@{/showFormForUpdate/{id}(id=${books.id})}" class="btn btn-primary">Update</a>
+					    <a th:href="@{/deleteBooks/{id}(id=${books.id})}" class="btn btn-danger">Delete</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
 
 </body>
 </html>

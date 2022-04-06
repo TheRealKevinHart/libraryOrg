@@ -10,13 +10,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.springboot.libraryOrg.models.Books;
 import com.springboot.libraryOrg.repository.BooksRepository;
 import com.springboot.libraryOrg.services.BooksService;
+
 
 @Controller
 public class BooksController {
@@ -28,9 +27,8 @@ public class BooksController {
 	private BooksRepository booksRepository;
 	
 	// display list of books
-	//@RequestMapping(value = "/", method = {RequestMethod.GET, RequestMethod.POST})
 	@GetMapping("/")
-	public String viewHomePage(Model model, String title, String author) {
+	public String viewHomePage(Model model) {
 		return findPaginated(1, "title", "asc", model);		
 	}
 	
@@ -74,7 +72,7 @@ public class BooksController {
 			@RequestParam("sortField") String sortField,
 			@RequestParam("sortDir") String sortDir,
 			Model model) {
-		int pageSize = 10;
+		int pageSize = 5;
 		
 		Page<Books> page = booksService.findPaginated(pageNo, pageSize, sortField, sortDir);
 		List<Books> listBooks = page.getContent();
@@ -88,9 +86,6 @@ public class BooksController {
 		model.addAttribute("reverseSortDir", sortDir.equals("asc") ? "desc" : "asc");
 		
 		model.addAttribute("listBooks", listBooks);
-		
-		model.addAttribute("books", new Books());
-				
 		return "index";
 	}
 	
@@ -105,7 +100,7 @@ public class BooksController {
     @PostMapping("/booksSearch")
     public String booksSearch(Books books, Model model, String title) {
 
-        List<Books> foundBooks = booksRepository.findByBook(title);
+        List<Books> foundBooks = booksRepository.findByTitle(title);
         model.addAttribute("foundBooks", foundBooks);
 
         return "booksSearch";
