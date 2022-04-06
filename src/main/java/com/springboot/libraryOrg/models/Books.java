@@ -7,6 +7,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 
 @Entity // This tells Hibernate to make a table out of this class
 @Table(name = "books")
@@ -28,6 +30,7 @@ public class Books {
 	@Column(name="genre")
 	private String genre;
 
+	@Autowired
 	public Books() {
 		
 	}
