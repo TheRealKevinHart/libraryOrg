@@ -47,6 +47,13 @@ public class BooksService {
 			Sort.by(sortField).descending();
 		
 		Pageable pageable = PageRequest.of(pageNo - 1, pageSize, sort);
+		
+		return this.booksRepository.findAll(pageable);
+	}
+	
+	public Page<Books> findPaginated(int pageNo, int pageSize) {
+		Pageable pageable = PageRequest.of(pageNo - 1, pageSize);
+		
 		return this.booksRepository.findAll(pageable);
 	}
 }

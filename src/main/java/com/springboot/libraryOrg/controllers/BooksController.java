@@ -21,6 +21,8 @@ import com.springboot.libraryOrg.services.BooksService;
 
 @Controller
 public class BooksController {
+	
+	private int pageSize = 5;
 
 	@Autowired
 	private BooksService booksService;
@@ -32,7 +34,7 @@ public class BooksController {
 	//@GetMapping("/")
 	@RequestMapping(value="/", method = {RequestMethod.GET, RequestMethod.POST})
 	public String viewHomePage(Model model, String title) { //added in title!
-		return findPaginated(1, "title", "asc", model, title);		
+		return findPaginated(1, "title", "asc", model);		
 	}
 	
 	@GetMapping("/showNewBooksForm")
@@ -74,9 +76,8 @@ public class BooksController {
 	public String findPaginated(@PathVariable (value = "pageNo") int pageNo, 
 			@RequestParam("sortField") String sortField,
 			@RequestParam("sortDir") String sortDir,
-			Model model,
-			String title) { //added in title
-		int pageSize = 5;
+			Model model) {
+		model.addAttribute("books", new Books());
 		
 		Page<Books> page = booksService.findPaginated(pageNo, pageSize, sortField, sortDir);
 		List<Books> listBooks = page.getContent();
@@ -92,28 +93,32 @@ public class BooksController {
 		model.addAttribute("listBooks", listBooks);
 		
 		//Search Method!
-        model.addAttribute("books", new Books());
-        
-        List<Books> foundBooks = booksRepository.findByTitle(title);
-        model.addAttribute("foundBooks", foundBooks);
+//        model.addAttribute("books", new Books());
+//        
+//        List<Books> foundBooks = booksRepository.findByTitle(title);
+//        model.addAttribute("foundBooks", foundBooks);
         
 		return "index";
 	}
 	
-//    @GetMapping("/booksSearch")
-//    public String booksSearch(Model model) {
-//
-//        model.addAttribute("books", new Books());
-//
-//        return "booksSearch";
-//    }
-//
-//    @PostMapping("/booksSearch")
-//    public String booksSearch(Books books, Model model, String title) {
-//
-//        List<Books> foundBooks = booksRepository.findByTitle(title);
-//        model.addAttribute("foundBooks", foundBooks);
-//
-//        return "booksSearch";
-//    }
+    @GetMapping("/booksSearch")
+    public String booksSearch(Model model) {
+    	
+        model.addAttribute("books", new Books());
+
+        return "booksSearch";
+    }
+
+    @PostMapping("/booksSearch")
+    public String booksSearch(Books books, Model model, String title) {
+    	
+		Page<Books> page = booksService.findPaginated(1, pageSize);
+		List<Books> listBooks = page.getContent();
+    	model.addAttribute("listBooks", listBooks);
+
+        List<Books> foundBooks = booksRepository.findByTitle(title);
+        model.addAttribute("foundBooks", foundBooks);
+
+        return "booksSearch";
+    }
 }
