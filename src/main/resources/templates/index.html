@@ -14,16 +14,6 @@
 		  <a th:href="@{/}">Home</a>
 		  <a th:href="@{/booksSearch}">Search</a>
 		</div>
-		
-		<!-- Added this in below -->
-		<form th:object="${books}" method="post">
-			<div>
-				<label for="title">Search: </label>
-				<input type="text" name="title" th:value="*{title}">
-				<input type="submit" value="Search">
-			</div>
-		</form>
-		<!-- end of addition -->
 	
 		<div class="container my-2">
 		<h1>List of Books</h1>
@@ -44,7 +34,7 @@
 						<th> Actions </th>
 					</tr>
 				</thead>
-				<tbody>
+				<!--<tbody>
 					<tr th:each="books:${foundBooks}">
 					<td th:text="${books.title}"></td>
 					<td th:text="${books.author}"></td>
@@ -54,7 +44,7 @@
 					<a th:href="@{/deleteBooks/{id}(id=${books.id})}" class="btn btn-danger">Delete</a>
 					</td>
 					</tr>
-				</tbody>
+				</tbody>-->
 				<tbody>
 					<tr th:each="books:${listBooks}">
 						<td th:text="${books.title}"></td>

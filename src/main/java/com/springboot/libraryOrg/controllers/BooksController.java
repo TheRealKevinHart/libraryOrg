@@ -21,8 +21,6 @@ import com.springboot.libraryOrg.services.BooksService;
 
 @Controller
 public class BooksController {
-	
-	private int pageSize = 5;
 
 	@Autowired
 	private BooksService booksService;
@@ -77,6 +75,9 @@ public class BooksController {
 			@RequestParam("sortField") String sortField,
 			@RequestParam("sortDir") String sortDir,
 			Model model) {
+		
+		int pageSize = 50;
+		
 		model.addAttribute("books", new Books());
 		
 		Page<Books> page = booksService.findPaginated(pageNo, pageSize, sortField, sortDir);
@@ -91,12 +92,6 @@ public class BooksController {
 		model.addAttribute("reverseSortDir", sortDir.equals("asc") ? "desc" : "asc");
 		
 		model.addAttribute("listBooks", listBooks);
-		
-		//Search Method!
-//        model.addAttribute("books", new Books());
-//        
-//        List<Books> foundBooks = booksRepository.findByTitle(title);
-//        model.addAttribute("foundBooks", foundBooks);
         
 		return "index";
 	}
@@ -111,10 +106,6 @@ public class BooksController {
 
     @PostMapping("/booksSearch")
     public String booksSearch(Books books, Model model, String title) {
-    	
-		Page<Books> page = booksService.findPaginated(1, pageSize);
-		List<Books> listBooks = page.getContent();
-    	model.addAttribute("listBooks", listBooks);
 
         List<Books> foundBooks = booksRepository.findByTitle(title);
         model.addAttribute("foundBooks", foundBooks);
