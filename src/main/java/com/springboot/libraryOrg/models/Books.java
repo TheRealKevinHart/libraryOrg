@@ -15,7 +15,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class Books {
 	
 	@Id //Specifies the primary key of an entity
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	//@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 	
 	@Column(name="title")
