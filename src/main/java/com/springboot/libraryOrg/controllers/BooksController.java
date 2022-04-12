@@ -100,15 +100,18 @@ public class BooksController {
     public String booksSearch(Model model) {
     	
         model.addAttribute("books", new Books());
+        
+    	String page = findPaginated(1, "title", "asc", model);
+    	model.addAttribute("page", page);
+    	
+    	List<Books> listBooks = booksRepository.findAll();
+    	model.addAttribute("listBooks", listBooks);
 
         return "booksSearch";
     }
 
     @PostMapping("/booksSearch")
     public String booksSearch(Books books, Model model, String title) {
-    	
-    	String page = findPaginated(1, "title", "asc", model);
-    	model.addAttribute("listBooks", page);
 
         List<Books> foundBooks = booksRepository.findByTitle(title);
         model.addAttribute("foundBooks", foundBooks);
