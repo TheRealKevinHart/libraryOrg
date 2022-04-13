@@ -56,4 +56,8 @@ public class BooksService {
 		
 		return this.booksRepository.findAll(pageable);
 	}
+	
+	public List<Books> search(String keyword) {
+		return booksRepository.search(keyword);
+	}
 }

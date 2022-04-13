@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.springboot.libraryOrg.models.Books;
 import com.springboot.libraryOrg.repository.BooksRepository;
 import com.springboot.libraryOrg.services.BooksService;
-
 
 @Controller
 public class BooksController {
@@ -109,13 +109,15 @@ public class BooksController {
 
         return "booksSearch";
     }
-
-    @PostMapping("/booksSearch")
-    public String booksSearch(Books books, Model model, String title) {
-
-        List<Books> foundBooks = booksRepository.findByTitle(title);
-        model.addAttribute("foundBooks", foundBooks);
-
-        return "booksSearch";
-    }
+	
+	@PostMapping("/booksSearch")
+	public String booksSearch(@Param("keyword") String keyword, Model model) {
+		
+		List<Books> foundBooks = booksService.search(keyword);
+		
+		model.addAttribute("keyword", keyword);
+		model.addAttribute("foundBooks", foundBooks);
+		
+		return "booksSearch";
+	}
 }
