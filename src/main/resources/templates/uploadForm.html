@@ -15,7 +15,7 @@
 		  <a th:href="@{/booksSearch}">Search</a>
 	</div>
 
-	<div th:if="${message}">
+	<!--<div th:if="${message}">
 		<h2 th:text="${message}"></h2>
 	</div>
 
@@ -34,7 +34,13 @@
 				<a th:href="${file}" th:text="${file}"></a>
 			</li>
 		</ul>
-	</div>
+	</div>-->
+	
+	<!--<form enctype="multipart/form-data" method="post" action="pyBookScanner.py">
+		<input type="file" id="files" name="filename" placeholder="image"/>
+		<br>
+		<input type="submit" name="sub" value="Upload"/>
+	</form>-->
 
 </body>
 </html>
