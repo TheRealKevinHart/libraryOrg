@@ -30,6 +30,10 @@ body {
 	background-color: rgb(0, 0, 0);
 }
 
+#files {
+	float:right;
+}
+
 a {
 	color: blue;
 }
