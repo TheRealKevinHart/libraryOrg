@@ -109,6 +109,8 @@ public class BooksController {
 
         return "booksSearch";
     }
+    
+    //for full-text search, you must alter table within MySQL and add index name "full_text_search_idx" with FULLTEXT as type
 	
 	@PostMapping("/booksSearch")
 	public String booksSearch(@Param("keyword") String keyword, Model model) {
