@@ -2,7 +2,7 @@ import cv2
 import pytesseract
 pytesseract.pytesseract.tesseract_cmd = r'C:\\Program Files\\Tesseract-OCR\\tesseract.exe'
 
-img = cv2.imread('book2.jpg')
+img4 = cv2.imread('files\\book2.jpg')
 
-text = pytesseract.image_to_string(img)
-print(text)
+text4 = pytesseract.image_to_string(img4)
+print(text4)
