@@ -9,9 +9,9 @@ public class ReadImage {
 	public static void main(String[] args) {
 		Tesseract tess = new Tesseract();
 		try {
-			tess.setDatapath("C:\\Users\\wsfer\\Tess4j\\tessdata");
+			tess.setDatapath("C:\\Users\\wsfer\\Tess4J\\Tess4J\\tessdata");
 			
-			String text = tess.doOCR(new File("D:\\EclipseWorkspace\\libraryOrg\\libraryOrg\\src\\main\\java\\com.springboot.libraryOrg.reader\\book2.jpg"));
+			String text = tess.doOCR(new File("book2.jpg"));
 			
 			System.out.println(text);
 		}
