@@ -8,7 +8,7 @@ public class StorageProperties {
 	/**
 	 * Folder location for storing files
 	 */
-	private String location = "D:\\EclipseWorkspace\\libraryOrg\\libraryOrg\\images";
+	private String location = "C:\\Users\\wsfer\\images";
 
 	public String getLocation() {
 		return location;

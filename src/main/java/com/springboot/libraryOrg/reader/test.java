@@ -8,7 +8,7 @@ import net.sourceforge.tess4j.*;
 public class test {
 	public static void main(String[] args) throws IOException{
 		
-		File imageFile = new File("D:\\EclipseWorkspace\\libraryOrg\\libraryOrg\\images\\book2.jpg");
+		File imageFile = new File("C:\\Users\\wsfer\\images\\book2.jpg");
 				
 		ITesseract instance = new Tesseract();
 		instance.setDatapath("D:\\EclipseWorkspace\\libraryOrg\\libraryOrg\\tessdata");
