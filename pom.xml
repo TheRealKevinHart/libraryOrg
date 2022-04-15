@@ -59,12 +59,16 @@
 		    <artifactId>bootstrap</artifactId>
 		    <version>4.3.1</version>
 		</dependency>
-		<dependency>
+		<!--<dependency>
 			<groupId>org.python</groupId>
 			<artifactId>jython</artifactId>
 			<version>2.7.2</version>
-		</dependency>
-
+		</dependency>-->
+        <dependency>
+            <groupId>org.python</groupId>
+            <artifactId>jython-standalone</artifactId>
+            <version>2.7.2</version>
+        </dependency>
 	</dependencies>
 
 	<build>

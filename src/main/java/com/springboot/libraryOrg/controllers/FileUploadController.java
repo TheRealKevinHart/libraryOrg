@@ -3,6 +3,7 @@ package com.springboot.libraryOrg.controllers;
 import java.io.IOException;
 import java.util.stream.Collectors;
 
+import org.python.util.PythonInterpreter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
@@ -62,10 +63,17 @@ public class FileUploadController {
 
 		return "redirect:/files";
 	}
+	
+	@GetMapping("/bookScanner")
+	public String bookScanner(Model model) {
+		try(PythonInterpreter pyInterp = new PythonInterpreter()) {
+			pyInterp.exec("print('Hello world!')");
+		}
+		return "redirect:/files";
+	}
 
 	@ExceptionHandler(StorageFileNotFoundException.class)
 	public ResponseEntity<?> handleStorageFileNotFound(StorageFileNotFoundException exc) {
 		return ResponseEntity.notFound().build();
 	}
-
 }
