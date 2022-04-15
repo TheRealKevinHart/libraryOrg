@@ -9,7 +9,7 @@ public class ReadImage {
 	public static void main(String[] args) {
 		Tesseract tess = new Tesseract();
 		try {
-			tess.setDatapath("C:\\Users\\wsfer\\Tess4J-3.4.8-src\\Tess4j\\tessdata");
+			tess.setDatapath("C:\\Users\\wsfer\\Tess4j\\tessdata");
 			
 			String text = tess.doOCR(new File("D:\\EclipseWorkspace\\libraryOrg\\libraryOrg\\src\\main\\java\\com.springboot.libraryOrg.reader\\book2.jpg"));
 			
