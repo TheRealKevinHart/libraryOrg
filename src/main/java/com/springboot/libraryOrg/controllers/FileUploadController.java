@@ -20,6 +20,7 @@ import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBui
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.springboot.libraryOrg.exceptions.StorageFileNotFoundException;
+import com.springboot.libraryOrg.reader.bookScanner;
 import com.springboot.libraryOrg.services.StorageService;
 
 @Controller
@@ -57,8 +58,9 @@ public class FileUploadController {
 			RedirectAttributes redirectAttributes) {
 
 		storageService.store(file);
-		redirectAttributes.addFlashAttribute("message",
-				"You successfully uploaded " + file.getOriginalFilename() + "!");
+		//redirectAttributes.addFlashAttribute("message", "You successfully uploaded " + file.getOriginalFilename() + "!");
+		
+		bookScanner sc = new bookScanner();
 
 		return "redirect:/files";
 	}
