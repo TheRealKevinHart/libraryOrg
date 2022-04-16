@@ -5,7 +5,7 @@ import java.io.IOException;
 
 import net.sourceforge.tess4j.*;
 
-public class test {
+public class bookScanner {
 	public static void main(String[] args) throws IOException{
 		
 		File imageFile = new File("C:\\Users\\wsfer\\images\\book2.jpg");
