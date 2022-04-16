@@ -10,6 +10,9 @@ public class bookScanner {
 		
 		File imageFile = new File("C:\\Users\\wsfer\\images\\book2.jpg");
 				
+		//Change Datapath based off of computer
+		//PC: "D:\\EclipseWorkspace\\libraryOrg\\libraryOrg\\tessdata"
+		//LAPTOP: 
 		ITesseract instance = new Tesseract();
 		instance.setDatapath("D:\\EclipseWorkspace\\libraryOrg\\libraryOrg\\tessdata");
 		
