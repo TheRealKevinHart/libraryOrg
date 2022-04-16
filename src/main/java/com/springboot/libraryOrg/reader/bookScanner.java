@@ -1,27 +1,28 @@
 package com.springboot.libraryOrg.reader;
 
 import java.io.File;
-import java.io.IOException;
 
 import net.sourceforge.tess4j.*;
 
 public class bookScanner {
-	public static void main(String[] args) throws IOException{
-		
-		File imageFile = new File("C:\\Users\\wsfer\\images\\book2.jpg");
-				
+	
+	public String booksScanner() {
+		File imageFile = new File("C:\\Users\\wsfer\\images\\eurotext.tif");
+
 		//Change Datapath based off of computer
 		//PC: "D:\\EclipseWorkspace\\libraryOrg\\libraryOrg\\tessdata"
-		//LAPTOP: 
+		//LAPTOP: "C:\\Users\\wsfer\\git\\libraryOrg\\tessdata"
 		ITesseract instance = new Tesseract();
-		instance.setDatapath("D:\\EclipseWorkspace\\libraryOrg\\libraryOrg\\tessdata");
+		instance.setDatapath("C:\\Users\\wsfer\\git\\libraryOrg\\tessdata");
 		
 		try {
 			String result = instance.doOCR(imageFile);
-			System.out.println(result);
+			return result;
+			//System.out.println(result);
 		}
 		catch (TesseractException e) {
 			System.err.println(e.getMessage());
+			return "";
 		}
 	}
 }

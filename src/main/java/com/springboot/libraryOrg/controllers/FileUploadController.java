@@ -61,6 +61,7 @@ public class FileUploadController {
 		//redirectAttributes.addFlashAttribute("message", "You successfully uploaded " + file.getOriginalFilename() + "!");
 		
 		bookScanner sc = new bookScanner();
+		redirectAttributes.addFlashAttribute("message", sc.booksScanner());
 
 		return "redirect:/files";
 	}
