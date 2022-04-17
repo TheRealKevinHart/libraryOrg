@@ -10,12 +10,6 @@ import com.springboot.libraryOrg.models.Books;
 
 @Repository
 public interface BooksRepository extends JpaRepository<Books, Long>{
-	//New
-//	Page<Books> findByTitle(String title, Pageable pageable);
-//	Page<Books> findByAuthor(String author, Pageable pageable);
-	
-	//Old
-//	List<Books> findByTitle(String title);
 	
 	@Query(value = "SELECT * FROM books WHERE MATCH(title, author) AGAINST(?1)",
 			//+ "MATCH(title, author, year) "

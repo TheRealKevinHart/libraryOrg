@@ -35,14 +35,15 @@ public class BooksController {
 		return findPaginated(1, "title", "asc", model);		
 	}
 	
-	@GetMapping("/showNewBooksForm")
-	public String showNewBooksFor(Model model) {
+	//@GetMapping("/showNewBooksForm")
+	@RequestMapping(value="/showNewBooksForm", method = {RequestMethod.GET, RequestMethod.POST})
+	public String showNewBooksForm(Model model) {
 		// create model attribute to bind form data
 		Books books = new Books();
 		model.addAttribute("books", books);
 		return "new_books";
 	}
-	
+		
 	@PostMapping("/saveBooks")
 	public String saveBooks(@ModelAttribute("books") Books books) {
 		// save books to database

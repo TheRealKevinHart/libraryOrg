@@ -49,8 +49,7 @@ public class FileUploadController {
 	public ResponseEntity<Resource> serveFile(@PathVariable String filename) {
 
 		Resource file = storageService.loadAsResource(filename);
-		return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION,
-				"attachment; filename=\"" + file.getFilename() + "\"").body(file);
+		return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + file.getFilename() + "\"").body(file);
 	}
 
 	@PostMapping("/files")
@@ -63,7 +62,8 @@ public class FileUploadController {
 		bookScanner sc = new bookScanner();
 		redirectAttributes.addFlashAttribute("message", sc.booksScanner());
 
-		return "redirect:/files";
+		//return "redirect:/files";
+		return "redirect:/showNewBooksForm";
 	}
 
 	@ExceptionHandler(StorageFileNotFoundException.class)

@@ -38,6 +38,10 @@
 					
 			<br>	
 			<a id="files" th:href = "@{/files}">Add File</a>
+			
+			<div th:if="${message}">
+                <h2 th:text="${message}"></h2>
+            </div>
 		</form>
 		<hr>
 		
