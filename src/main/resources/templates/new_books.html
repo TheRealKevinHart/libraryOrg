@@ -6,7 +6,6 @@
 
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="/CSS/style.css" />
-<script src="main.js"></script>
 </head>
 <body>
 
@@ -18,6 +17,11 @@
 	<div class="container">
 		<h1>Books Management System</h1>
 		<hr>
+		
+		<h3 id="scan">Scanned Information</h3>
+		<div th:if="${message}">
+            <h5 th:text="${message}" id="scan"></h5>
+        </div>
 
 		<form action="#" th:action="@{/saveBooks}" th:object="${books}"
 			method="POST">
@@ -36,12 +40,9 @@
 			<hr>
 			<button type="submit" class="btn btn-info col-2"> Save Books</button>
 					
-			<br>	
+			<br><br>
 			<a id="files" th:href = "@{/files}">Add File</a>
 			
-			<div th:if="${message}">
-                <h2 th:text="${message}"></h2>
-            </div>
 		</form>
 		<hr>
 		

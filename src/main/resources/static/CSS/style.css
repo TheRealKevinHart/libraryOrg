@@ -20,14 +20,15 @@
   color: black;
 }
 
-@media (max-width: 979px) {
-  body {
-    padding-top: 50px;
-  }
-}
-
 body {
-	background-color: rgb(0, 0, 0);
+    background-color: rgb(0, 0, 0);
+    padding-top: 60px;
+}
+@media (max-width: 979px) {
+	  body {
+	      padding-top: 0px;
+	      padding-top: 50px;
+	  }
 }
 
 #files {
@@ -43,5 +44,17 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 td, tr, th {
+	color: white;
+}
+
+#scan {
+    float: right;	
+}
+
+#new {
+	float: right;
+}
+
+#rows {
 	color: white;
 }
