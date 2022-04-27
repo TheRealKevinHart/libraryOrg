@@ -30,7 +30,7 @@ public class bookScanner {
 		//PC: "D:\\EclipseWorkspace\\libraryOrg\\libraryOrg\\tessdata"
 		//LAPTOP: "C:\\Users\\wsfer\\git\\libraryOrg\\tessdata"
 		ITesseract instance = new Tesseract();
-		instance.setDatapath("C:\\Users\\wsfer\\git\\libraryOrg\\tessdata");
+		instance.setDatapath("D:\\EclipseWorkspace\\libraryOrg\\libraryOrg\\tessdata");
 		
 		try {
 			String result = instance.doOCR(chosenFile);
